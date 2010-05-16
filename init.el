@@ -178,6 +178,16 @@
 (server-start)
 
 
+;; Gotta have that hippe expand
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+
+;; Load sr-speedbar and bind it to "M-s M-s"
+(load-file "~/.emacs.d/lib/sr-speedbar.el")
+(global-set-key (kbd "M-s M-s") 'sr-speedbar-toggle)
+;; TODO: That key binding should also switch to the speedbar.
+
+
 ;; Report the time it took to initialize emacs in the *Messages* buffer.
 (message "My .emacs loaded in %ds"
          (destructuring-bind (hi lo ms) (current-time)
