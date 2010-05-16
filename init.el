@@ -151,4 +151,9 @@
 (show-paren-mode 1)
 
 
+;; Set up bindings for fill-paragraph to auto-wrap paragraphs of text, etc.
+(global-set-key (kbd "C-x C-p") 'fill-paragraph)
+(global-set-key (kbd "C-x p") 'fill-paragraph)
+
+
 ;;; init.el -- The End.
