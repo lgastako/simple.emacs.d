@@ -131,4 +131,12 @@
 ;; Enable shift-arrow keys to move between buffers directionally.
 (windmove-default-keybindings)
 
+
+;; Let's have some snippets, shall we?
+(add-to-list 'load-path "~/.emacs.d/lib/yasnippet")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/snippets")
+
+
 ;;; init.el -- The End.
