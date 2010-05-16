@@ -17,6 +17,11 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 
+;; Have emacs store customizations in a separate file instead of modifying
+;; this one.
+(setq custom-file "~/.emacs.d/customizations.el")
+(load custom-file 'noerror)
+
 
 ;; Set up the color theme library
 (add-to-list 'load-path "~/.emacs.d/lib/color-theme")
