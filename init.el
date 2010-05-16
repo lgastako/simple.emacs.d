@@ -55,11 +55,11 @@
 ;; which also defines a textmate-minor mode which provides different
 ;; functionality.
 
-(load-file "~/.emacs.d/lib/emacs-textmate.el")
+(load-file "~/.emacs.d/lib/emacs-textmate/emacs-textmate.el")
 (textmate-pairs-mode)
 
 ;; This is the other textmate mode I was referring to above:
-(load-file "~/.emacs.d/lib/textmate.el")
+(load-file "~/.emacs.d/lib/textmate.el/textmate.el")
 (textmate-mode)
 
 
