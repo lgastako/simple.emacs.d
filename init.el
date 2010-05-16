@@ -146,4 +146,9 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
 
+;; Causes emacs to highlight the matching paren any time the point is
+;; resting on one.
+(show-paren-mode 1)
+
+
 ;;; init.el -- The End.
