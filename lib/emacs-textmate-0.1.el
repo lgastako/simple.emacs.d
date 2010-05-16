@@ -24,11 +24,11 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-minor-mode textmate-mode
-       "Toggle Textmate mode.
-     With no argument, this command toggles the mode.
-     Non-null prefix argument turns on the mode.
-     Null prefix argument turns off the mode.
+(define-minor-mode textmate-pairs-mode
+  "Toggle textmate-pairs mode.
+     With no argument, this command toggles the mode.  Non-null
+     prefix argument turns on the mode.  Null prefix argument
+     turns off the mode.
 "
       ;; The initial value.
       nil

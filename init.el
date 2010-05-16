@@ -50,7 +50,16 @@
 ;; quote and it will insert an open quote at the beginning of the
 ;; region and a close quote at the end.
 
+;; NOTE: I renamed the minor mode ("textmate-mode") defined in this
+;; file to "textmate-pairs-mode" to avoid conflicts with textmate.el
+;; which also defines a textmate-minor mode which provides different
+;; functionality.
+
 (load-file "~/.emacs.d/lib/emacs-textmate.el")
+(textmate-pairs-mode)
+
+;; This is the other textmate mode I was referring to above:
+(load-file "~/.emacs.d/lib/textmate.el")
 (textmate-mode)
 
 
@@ -119,5 +128,7 @@
                 tags-file-name
                 register-alist)))
 
+;; Enable shift-arrow keys to move between buffers directionally.
+(windmove-default-keybindings)
 
 ;;; init.el -- The End.
