@@ -174,10 +174,15 @@
 (global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
 
 
+;; Start the server by default
+(server-start)
+
+
 ;; Report the time it took to initialize emacs in the *Messages* buffer.
 (message "My .emacs loaded in %ds"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*) (second
                                                        *emacs-load-start*)))))
+
 
 ;;; init.el -- The End.
