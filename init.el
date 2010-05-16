@@ -48,12 +48,12 @@
 (textmate-mode)
 
 
-;; This makes emacs behave more like Textmate with regard to pasting 
+;; This makes emacs behave more like Textmate with regard to pasting
 ;; idented code.  I don't think it's quite right, in that let's say
 ;; you cut something that is indented four spaces and then move to
 ;; a point where it's indented 12 spaces and yank, the yanked code
 ;; will be indented 16 spaces... but it's closer to the behavior that
-;; I want. 
+;; I want.
 (dolist (command '(yank yank-pop))
   (eval `(defadvice ,command (after indent-region activate)
            (and (not current-prefix-arg)
@@ -81,6 +81,11 @@
 (add-hook 'python-mode-hook
           '(lambda ()
              (local-set-key (kbd "RET") 'newline-and-indent)))
+
+
+;; We want to know when we're leaving behind trailing whitespace.
+(setq show-trailing-whitespace t)
+(setq-default show-trailing-whitespace t)
 
 
 ;;; init.el -- The End.
