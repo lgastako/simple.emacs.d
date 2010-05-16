@@ -37,4 +37,14 @@
 (put 'downcase-region 'disabled nil)
 
 
+;; The emacs-textmate package makes emacs mimic Textmate's behavior with
+;; regards to matching pairs of e.g. quotes, parens, etc.
+;; For example, if you type a quote it will add the closing quote
+;; automatically and then position the cursor inside the two quotes...
+;; but then if you hit another quote it will replace the second one (even if
+;; you already typed something)
+
+(load-file "~/.emacs.d/lib/emacs-textmate.el")
+(textmate-mode)
+
 ;;; init.el -- The End.
