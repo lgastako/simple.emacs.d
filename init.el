@@ -9,6 +9,10 @@
 ;; This is the first thing to get loaded for user customization.
 
 
+;; Let's time how long it takes to startup emacs.
+(defvar *emacs-load-start* (current-time))
+
+
 ;; Disable the menu bar and tool bar
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -155,5 +159,20 @@
 (global-set-key (kbd "C-x C-p") 'fill-paragraph)
 (global-set-key (kbd "C-x p") 'fill-paragraph)
 
+;; Load rect-mark and setup key bindings for it.
+;; TODO: Write my own version of this that behaves like TextMate.
+;; Or maybe try CuaMode
+(load-file "~/.emacs.d/lib/rect-mark/rect-mark.el")
+(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
+(global-set-key (kbd "C-x r C-x") 'rm-exchange-point-and-mark)
+(global-set-key (kbd "C-x r C-w") 'rm-kill-region)
+(global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
+
+
+;; Report the time it took to initialize emacs in the *Messages* buffer.
+(message "My .emacs loaded in %ds"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*) (second
+                                                       *emacs-load-start*)))))
 
 ;;; init.el -- The End.
