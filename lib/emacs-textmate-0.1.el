@@ -29,7 +29,7 @@
      With no argument, this command toggles the mode.
      Non-null prefix argument turns on the mode.
      Null prefix argument turns off the mode.
-"     
+"
       ;; The initial value.
       nil
       ;; The indicator for the mode line.
@@ -45,7 +45,7 @@
         ("[" . skeleton-pair-insert-maybe)
         ("(" . skeleton-pair-insert-maybe)
         ("{" . skeleton-pair-insert-maybe)
-        )       
+        )
       :group 'textmate
       (progn
         (setq skeleton-pair t))
@@ -107,6 +107,6 @@
 (defun move-over-curly ()  (interactive)(move-over ?\} ))
 (defun move-over-square ()  (interactive)(move-over ?\] ))
 (defun move-over-quote ()  (interactive)(move-over ?\' ))
-(defun move-over-dbl-quote ()  (interactive)(move-over ?\" )) 
+(defun move-over-dbl-quote ()  (interactive)(move-over ?\" ))
 
 
