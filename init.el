@@ -47,4 +47,40 @@
 (load-file "~/.emacs.d/lib/emacs-textmate.el")
 (textmate-mode)
 
+
+;; This makes emacs behave more like Textmate with regard to pasting 
+;; idented code.  I don't think it's quite right, in that let's say
+;; you cut something that is indented four spaces and then move to
+;; a point where it's indented 12 spaces and yank, the yanked code
+;; will be indented 16 spaces... but it's closer to the behavior that
+;; I want. 
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     clojure-mode
+                                                     scheme-mode
+                                                     haskell-mode
+                                                     ruby-mode
+                                                     rspec-mode
+                                                     python-mode
+                                                     c-mode
+                                                     c++-mode
+                                                     objc-mode
+                                                     latex-mode
+                                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
+
+
+;; This makes enter/return auto-indent in c-like modes.
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (local-set-key (kbd "RET") 'newline-and-indent)))
+;; And in python... TODO: DRY these up
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "RET") 'newline-and-indent)))
+
+
 ;;; init.el -- The End.
