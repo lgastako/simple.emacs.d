@@ -182,6 +182,9 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 
+;; Column numbers, please.
+(column-number-mode 1)
+
 ;; Load sr-speedbar and bind it to "M-s M-s"
 (load-file "~/.emacs.d/lib/sr-speedbar.el")
 (global-set-key (kbd "M-s M-s") 'sr-speedbar-toggle)
