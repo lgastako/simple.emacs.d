@@ -1,2 +1,5 @@
-http://www.morishima.net/~naoto/software/elscreen/
+- http://www.morishima.net/~naoto/software/elscreen/
+- Get lintrunner output back into the message buf
+
+
 
