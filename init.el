@@ -174,6 +174,24 @@
 (global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
 
 
+;; Add a minimap
+(add-to-list 'load-path "~/.emacs.d/lib/minimap")
+(require 'minimap)
+
+(setq minimap-active 0)
+(defun toggle-minimap ()
+  "Toggle minimap on/off"
+  (interactive)
+  (if (= minimap-active 1)
+      (progn
+        (minimap-kill)
+        (setq minimap-active 0))
+    (progn
+      (minimap-create)
+      (setq minimap-active 1))))
+
+(global-set-key (kbd "C-S-m") 'toggle-minimap)
+
 ;; Start the server by default
 (server-start)
 
@@ -196,6 +214,16 @@
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*) (second
                                                        *emacs-load-start*)))))
+
+
+;; Add js2-mode for editing javascript.
+;; js2-mode MUST be byte compiler or it will refuse to run.  I use something
+;; like this command to byte compile everything:
+;; find . -name \*.el -exec emacs -batch -f batch-byte-compile {} \;
+(add-to-list 'load-path "~/.emacs.d/lib/js2-mode")
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
 
 ;;; init.el -- The End.
