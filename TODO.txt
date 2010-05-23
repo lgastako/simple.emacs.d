@@ -1,5 +1,5 @@
 - http://www.morishima.net/~naoto/software/elscreen/
 - Get lintrunner output back into the message buf
-
+- Get back whatever it was that replaces file<1> file<2> with subpaths.
 
 
