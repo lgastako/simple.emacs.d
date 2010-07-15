@@ -226,4 +226,54 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
 
+;; Set up slime + clojure
+(add-to-list 'load-path "~/.emacs.d/lib/clojure-mode")
+(require 'clojure-mode)
+
+;; swank-clojure
+(add-to-list 'load-path "~/.emacs.d/lib/swank-clojure/")
+
+(setq swank-clojure-jar-path "~/.clojure/clojure.jar"
+      swank-clojure-extra-classpaths (list
+				      "~/opt/swank-clojure/src/main/clojure"
+				      "~/.clojure/clojure-contrib.jar"))
+
+(require 'swank-clojure)
+
+;; slime
+(eval-after-load "slime"
+  '(progn (slime-setup '(slime-repl))))
+
+(add-to-list 'load-path "~/.emacs.d/lib/slime")
+(require 'slime)
+(slime-setup)
+
+;; flymake->lintrunner
+;; TODO: Only do all this if the lintrunner script exists, or pull
+;; lintrunner into my .emacs.d
+(when (load "flymake" t)
+  (defun flymake-pylint-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "/pluto/pycloud/apps/emacs/bin/lintrunner.py" (list local-file))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pylint-init)))
+
+(add-hook 'python-mode-hook (lambda() (flymake-mode t)))
+
+
+;; Allow us to invoke occur from within isearch:
+;; Alex Schroeder [http://www.emacswiki.org/cgi-bin/wiki/OccurBuffer]
+(defun isearch-occur ()
+  "*Invoke `occur' from within isearch."
+  (interactive)
+  (let ((case-fold-search isearch-case-fold-search))
+    (occur (if isearch-regexp isearch-string (regexp-quote isearch-string)))))
+
+(define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+
 ;;; init.el -- The End.
