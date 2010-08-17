@@ -16,10 +16,6 @@
 
 (add-hook 'python-mode-hook (lambda() (flymake-mode t)))
 
-;; (load "~/.emacs.d/vendor/pymacs.el")
-;; (require 'pymacs)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
+;; Set path to fsharp tools
+(setq inferior-fsharp-program "mono /home/john/src/FSharp/bin/fsi.exe --readline-")
+(setq fsharp-compiler "mono /home/john/src/FSharp/bin/fsc.exe")

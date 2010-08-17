@@ -17,6 +17,7 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 
+
 ;; Have emacs store customizations in a separate file instead of modifying
 ;; this one.
 (setq custom-file "~/.emacs.d/customizations.el")
@@ -30,6 +31,7 @@
   '(progn
      (color-theme-initialize)
      (color-theme-hober)))
+
 
 ;; Load and activate the railscast theme
 (load-file "~/.emacs.d/themes/color-theme-railscasts.el")
@@ -45,6 +47,11 @@
 ;; respectively.
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+
+;; Get rid of the stupid <2> and <3> filename uniqification
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 
 ;; The emacs-textmate package makes emacs mimic Textmate's behavior
@@ -248,23 +255,14 @@
 (require 'slime)
 (slime-setup)
 
-;; flymake->lintrunner
-;; TODO: Only do all this if the lintrunner script exists, or pull
-;; lintrunner into my .emacs.d
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "/pluto/pycloud/apps/emacs/bin/lintrunner.py" (list local-file))))
+;; Set up system- and user- specific config files.
+(setq dotfiles-dir (file-name-directory
+                    (or (buffer-file-name) load-file-name)))
+(setq system-specific-config (concat dotfiles-dir system-name ".el")
+      user-specific-config (concat dotfiles-dir user-login-name ".el"))
 
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pylint-init)))
-
-(add-hook 'python-mode-hook (lambda() (flymake-mode t)))
-
+(if (file-exists-p system-specific-config) (load system-specific-config))
+(if (file-exists-p user-specific-config) (load user-specific-config))
 
 ;; Allow us to invoke occur from within isearch:
 ;; Alex Schroeder [http://www.emacswiki.org/cgi-bin/wiki/OccurBuffer]
@@ -275,5 +273,17 @@
     (occur (if isearch-regexp isearch-string (regexp-quote isearch-string)))))
 
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+
+;; Convert yes-or-no prompts to y-or-n prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Add haskell-mode
+(load "~/.emacs.d/lib/haskell-mode/haskell-site-file")
+
+;; Add F# mode
+(setq load-path (cons "~/.emacs.d/lib/fsharp" load-path))
+(setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
+(autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
+(autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
 
 ;;; init.el -- The End.
