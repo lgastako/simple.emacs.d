@@ -277,6 +277,19 @@
 ;; Convert yes-or-no prompts to y-or-n prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Make flymake errors show up in the as a minibuffer message when the
+;; point is over a line with an error
+(defun my-flymake-show-help ()
+  (when (get-char-property (point) 'flymake-overlay)
+    (let ((help (get-char-property (point) 'help-echo)))
+      (if help (message "%s" help)))))
+
+(add-hook 'post-command-hook 'my-flymake-show-help)
+
+;; Bind M-n and M-p to next/previous flymake errors.  This really shouldn't
+;; be global but whatever, I'll fix it later.
+(global-set-key (kbd "C-=") 'flymake-goto-next-error)
+
 ;; Add haskell-mode
 (load "~/.emacs.d/lib/haskell-mode/haskell-site-file")
 
