@@ -233,27 +233,27 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
 
-;; Set up slime + clojure
-(add-to-list 'load-path "~/.emacs.d/lib/clojure-mode")
-(require 'clojure-mode)
+;; ;; Set up slime + clojure
+;; (add-to-list 'load-path "~/.emacs.d/lib/clojure-mode")
+;; (require 'clojure-mode)
 
-;; swank-clojure
-(add-to-list 'load-path "~/.emacs.d/lib/swank-clojure/")
+;; ;; swank-clojure
+;; (add-to-list 'load-path "~/.emacs.d/lib/swank-clojure/")
 
-(setq swank-clojure-jar-path "~/.clojure/clojure.jar"
-      swank-clojure-extra-classpaths (list
-				      "~/opt/swank-clojure/src/main/clojure"
-				      "~/.clojure/clojure-contrib.jar"))
+;; (setq swank-clojure-jar-path "~/.clojure/clojure.jar"
+;;       swank-clojure-extra-classpaths (list
+;; 				      "~/opt/swank-clojure/src/main/clojure"
+;; 				      "~/.clojure/clojure-contrib.jar"))
 
-(require 'swank-clojure)
+;; (require 'swank-clojure)
 
-;; slime
-(eval-after-load "slime"
-  '(progn (slime-setup '(slime-repl))))
+;; ;; slime
+;; (eval-after-load "slime"
+;;   '(progn (slime-setup '(slime-repl))))
 
-(add-to-list 'load-path "~/.emacs.d/lib/slime")
-(require 'slime)
-(slime-setup)
+;; (add-to-list 'load-path "~/.emacs.d/lib/slime")
+;; (require 'slime)
+;; (slime-setup)
 
 ;; Set up system- and user- specific config files.
 (setq dotfiles-dir (file-name-directory
@@ -292,6 +292,11 @@
 
 ;; Add haskell-mode
 (load "~/.emacs.d/lib/haskell-mode/haskell-site-file")
+
+;; Scala-mode
+(add-to-list 'load-path "~/.emacs.d/lib/scala-mode")
+(require 'scala-mode-auto)
+
 
 ;; Add F# mode
 (setq load-path (cons "~/.emacs.d/lib/fsharp" load-path))
