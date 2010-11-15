@@ -16,6 +16,11 @@
 
 (add-hook 'python-mode-hook (lambda() (flymake-mode t)))
 
+
+;;(add-to-list 'load-path "~/.emacs.d/lib/")
+(require 'xcscope)
+
+
 ;; Set path to fsharp tools
 (setq inferior-fsharp-program "mono /home/john/src/FSharp/bin/fsi.exe --readline-")
 (setq fsharp-compiler "mono /home/john/src/FSharp/bin/fsc.exe")

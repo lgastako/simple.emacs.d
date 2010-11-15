@@ -304,4 +304,6 @@
 (autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
 (autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
 
+(load "~/.emacs.d/mystuff.el")
+
 ;;; init.el -- The End.
